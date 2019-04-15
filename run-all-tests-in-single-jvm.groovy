@@ -35,9 +35,6 @@ for(test in proc.result) {
     btrace_command = "/tmp/btrace/bin/btracer -o 'btrace_traces/"+test+".methods.btrace' BtraceAllMethods.class -cp /usr/share/java/junit4.jar:.:target/classes:target/test-classes SingleJUnitTestRunner '"+test+"'"
     println(btrace_command)
 
-    btraceall_command = "/tmp/btrace/bin/btracer -o 'btrace_traces/"+test+".spectrum.btrace' BtraceAllLines.class -cp /usr/share/java/junit4.jar:.:target/classes:target/test-classes SingleJUnitTestRunner '"+test+"'"
-    println(btraceall_command)
-
 //     proc = btrace_command.execute()
 //     proc.waitFor()
 //     println "Process exit code: ${proc.exitValue()}"

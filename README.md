@@ -3,7 +3,7 @@
 ## Repo explanation
 
 * `SingleJUnitTestRunner.java` contains a main method to run a single test class
-* `BtraceAllLines.java` and `BtraceAllMethods.java` contain Btrace scripts to be compiled with `btracec`
+* `BtraceAllMethods.java`: Btrace script to be compiled with `btracec`
 * `run-all-tests-in-single-jvm.groovy` generates one command per test
 
 ## Btrace
@@ -14,8 +14,6 @@ Prequisites:
 * download and unzip Btrace (eg in `/tmp/btrace`)
 * Compile the Btrace tracing scripts: 
   * `/tmp/btrace/bin/btracec BtraceAllMethods.java`
-  * `/tmp/btrace/bin/btracec BtraceAllLines.java`
-* Compile helper Java test runner for running a single test
   * `javac -cp /usr/share/java/junit4.jar SingleJUnitTestRunner.java`
 
 
@@ -24,7 +22,7 @@ Download and compile programs to be traced:
     git clone https://github.com/Spirals-Team/IntroClassJava/
     # compile one example
     cd IntroClassJava/dataset/syllables/ref/reference
-    # compile 
+    # compile app code (src/main/java) and test code (src/test/java)
     mvn clean test compile -DskipTests
     cd ../../../../../
     # copy the sources in the current working dir
