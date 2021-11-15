@@ -1,3 +1,6 @@
+I also cloned jsoup into the root as an example project :)
+
+
 # Collection of traces
 
 ## Repo explanation
@@ -11,11 +14,11 @@
 Prequisites:
 
 * make sure you have $JAVA_HOME: `export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/`
-* download and unzip Btrace (eg in `/tmp/btrace`)
+* download and unzip Btrace (eg in `btrace`)
 * download [jacoco](https://github.com/jacoco/jacoco/releases)
 * Compile the Btrace tracing scripts: 
-  * `/tmp/btrace/bin/btracec BtraceAllMethods.java`
-  * `javac -cp /usr/share/java/junit4.jar SingleJUnitTestRunner.java`
+  * `btrace/bin/btracec BtraceAllMethods.java`
+  * `javac -cp junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar:junit-platform-commons-1.7.1.jar SingleJUnitTestRunner.java`
 
 
 Download and compile programs to be traced:
@@ -36,8 +39,14 @@ Download and compile programs to be traced:
 Test one simple tracing with btrace:
 
     mkdir btrace_traces/
-    /tmp/btrace/bin/btracer -o btrace_traces/simpletrace.btrace BtraceAllMethods.class -cp /usr/share/java/junit4.jar:.:target/classes:target/test-classes SingleJUnitTestRunner 'introclassJava.Syllables_WhiteboxTest#test9'
+    btrace/bin/btracer -v --stdout -o btrace_traces/simpletrace.btrace BtraceAllMethods.class -cp .:target/classes:target/test-classes:junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-commons-1.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar SingleJUnitTestRunner 'org.jsoup.nodes.AttributeTest#html'
+
+    java -javaagent:btrace/libs/btrace-agent.jar=script=AllMethods.class -cp .:target/classes:target/test-classes:junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-commons-1.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar SingleJUnitTestRunner 'org.jsoup.nodes.AttributeTest#html'
+
+    btrace/bin/btracer -v --stdout -o btrace_traces/simpletrace.btrace BtraceAllMethods.class -cp junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar:junit-platform-commons-1.7.1.jar:hamcrest-2.2.jar:.:target/classes:target/test-classes SingleJUnitTestRunner 'org.jsoup.nodes.AttributeTest#html'
     cat btrace_traces/simpletrace.btrace 
+
+    btrace/bin/btracer -v --stdout -o btrace_traces/simpletrace.btrace AllMethods.class -cp .:target/classes:target/test-classes:junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-commons-1.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar SingleJUnitTestRunner 'introclassJava.Syllables_WhiteboxTest#test9'
 
 We want one trace per test, which means one process per test, for this we generate a file `tracing-commands.sh`
 
@@ -55,11 +64,11 @@ Test one simple tracing with btrace:
 
 ```sh
 mkdir jacoco_traces/
-java -javaagent:jacocoagent.jar=destfile=jacoco_traces/jacoco-example.exec -cp .:target/classes:target/test-classes:/usr/share/java/junit4.jar: SingleJUnitTestRunner 'introclassJava.Syllables_WhiteboxTest#test9'
+java -javaagent:jacoco/lib/jacocoagent.jar=destfile=jacoco_traces/jacoco-example.exec -cp .:target/classes:target/test-classes:junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-commons-1.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar SingleJUnitTestRunner 'introclassJava.Syllables_WhiteboxTest#test9'
 cat jacoco_traces/jacoco-example.exec
 
 # looking at the traces
-java -jar jacococli.jar report jacoco_traces/jacoco-example.exec --classfiles target/classes --csv jacoco_traces/jacoco-example.csv
+java -jar jacoco/lib/jacococli.jar report jacoco_traces/jacoco-example.exec --classfiles target/classes --csv jacoco_traces/jacoco-example.csv
 
 ```    
 

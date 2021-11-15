@@ -1,0 +1,30 @@
+### BTrace Log: 17.03.21, 14:56
+
+! ERROR
+java.lang.ExceptionInInitializerError
+	at org.openjdk.btrace.instr.Verifier.reportError(Verifier.java:60)
+	at org.openjdk.btrace.instr.BTraceProbePersisted$2$1.visitMethodInsn(BTraceProbePersisted.java:734)
+	at org.openjdk.btrace.libs.org.objectweb.asm.ClassReader.readCode(ClassReader.java:2419)
+	at org.openjdk.btrace.libs.org.objectweb.asm.ClassReader.readMethod(ClassReader.java:1488)
+	at org.openjdk.btrace.libs.org.objectweb.asm.ClassReader.accept(ClassReader.java:718)
+	at org.openjdk.btrace.libs.org.objectweb.asm.ClassReader.accept(ClassReader.java:401)
+	at org.openjdk.btrace.instr.BTraceProbePersisted.verifyBytecode(BTraceProbePersisted.java:587)
+	at org.openjdk.btrace.instr.BTraceProbePersisted.isVerified(BTraceProbePersisted.java:457)
+	at org.openjdk.btrace.instr.BTraceProbePersisted.checkVerified(BTraceProbePersisted.java:519)
+	at org.openjdk.btrace.agent.Client.loadClass(Client.java:338)
+	at org.openjdk.btrace.agent.FileClient.init(FileClient.java:84)
+	at org.openjdk.btrace.agent.FileClient.<init>(FileClient.java:60)
+	at org.openjdk.btrace.agent.Main.loadBTraceScript(Main.java:804)
+	at org.openjdk.btrace.agent.Main.startScripts(Main.java:322)
+	at org.openjdk.btrace.agent.Main.main(Main.java:148)
+	at org.openjdk.btrace.agent.Main.premain(Main.java:121)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndStartAgent(InstrumentationImpl.java:513)
+	at java.instrument/sun.instrument.InstrumentationImpl.loadClassAndCallPremain(InstrumentationImpl.java:525)
+Caused by: java.lang.NullPointerException
+	at java.base/java.util.ResourceBundle.getBundle(ResourceBundle.java:1281)
+	at org.openjdk.btrace.core.Messages.<clinit>(Messages.java:37)
+	... 22 more

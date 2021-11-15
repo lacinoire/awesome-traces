@@ -1,0 +1,1 @@
+java -javaagent:aspectjweaver.jar -cp .:target/classes:target/test-classes:junit-jupiter-api-5.7.1.jar:junit-jupiter-engine-5.7.1.jar:junit-platform-commons-1.7.1.jar:junit-platform-launcher-1.7.1.jar:junit-platform-engine-1.7.1.jar:aspectjrt.jar SingleJUnitTestRunner 'introclassJava.Syllables_WhiteboxTest#test9'

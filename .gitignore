@@ -5,3 +5,7 @@ spooned
 btrace_traces
 IntroClassJava
 tracing-commands.sh
+
+btrace
+jacoco
+junit-4.13.2.jar
