@@ -9,3 +9,4 @@ tracing-commands.sh
 btrace
 jacoco
 junit-4.13.2.jar
+jsoup

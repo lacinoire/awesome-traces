@@ -24,17 +24,17 @@ public class SingleJUnitTestRunner {
         int index = classAndMethod[0].lastIndexOf(".");
         String packageName = classAndMethod[0].substring(0, index);
         String className = classAndMethod[0].substring(index + 1);
-        //System.out.println(classAndMethod[0]+" "+classAndMethod[1]);
+        System.out.println(classAndMethod[0]+" "+classAndMethod[1]);
 
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
             .selectors(
-                //selectPackage("introclassJava")
-                //selectClass(SingleJUnitTestRunner.class.getClassLoader().loadClass("introclassJava.Syllables_WhiteboxTest"))
-                //selectClasspathRoots(Collections.singleton(new File("/target/test-classes")))
-                selectMethod("introclassJava.Syllables_WhiteboxTest#test9")
+                selectPackage("org.jsoup.nodes"),
+                selectClass(SingleJUnitTestRunner.class.getClassLoader().loadClass("org.jsoup.nodes.AttributeTest"))
+                // selectClasspathRoots(Collections.singleton(new File("/target/test-classes")))
+                // selectMethod("org.jsoup.nodes.AttributeTest#html")
             )
             .filters(
-                // includeClassNamePatterns(".*Test")
+                includeClassNamePatterns(".*Test")
             )
             .build();
             
@@ -55,7 +55,7 @@ public class SingleJUnitTestRunner {
         System.out.println(summary.getFailures().get(0).getException());
         System.out.println(summary.getFailures().get(0).getTestIdentifier());
 
-        testitest();
+        // testitest();
 
         summary.printTo(new PrintWriter(System.out));
 
